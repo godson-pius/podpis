@@ -108,9 +108,6 @@ document.getElementById('save').addEventListener("click", () => {
     }
 })
 
-function websiteVisits(response) {
-  document.querySelector("#visits").textContent = response.value;
-}
 // create.addEventListener("click", () => {
 //     var Url = signaturePad.toDataURL();
 //     image.src = Url;
