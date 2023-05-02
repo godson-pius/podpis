@@ -7,16 +7,25 @@ var file = document.getElementById('file')
 var pdf = document.getElementById('pdf')
 var url;
 
+/**
+ * A DomContentLoaded event to create the podpis pad.
+ */
 document.addEventListener("DOMContentLoaded", () => {
     const canvas = document.getElementById("signa");
     signaturePad = new SignaturePad(canvas);
 })
 
+/**
+ * An onclick event to clear podpis area
+ */
 document.getElementById('clear').addEventListener("click", () => {
     signaturePad.clear();
     image.src = "";
 })
 
+/**
+ * An onclick event for saving signed podpis
+ */
 document.getElementById('save').addEventListener("click", () => {
     if (signaturePad.isEmpty()) {
         alert("Signature is empty")
@@ -36,6 +45,11 @@ document.getElementById('save').addEventListener("click", () => {
     }
 })
 
+/**
+ * Used to generate random strings
+ * @param {Number} length - The length of text to generate
+ * @returns Number
+ */
 function generateName(length) {
   let result = '';
   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
