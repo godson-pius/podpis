@@ -24,26 +24,48 @@ document.getElementById('clear').addEventListener("click", () => {
 })
 
 /**
- * An onclick event for saving signed podpis
+ * Used for blob conversion.
+ * @param {*} dataURL 
+ * @returns Blob
  */
-document.getElementById('save').addEventListener("click", () => {
-    if (signaturePad.isEmpty()) {
-        alert("Signature is empty")
-    } else {
-        const name = prompt("Name signature");
-        if (name != null) {
-          var dataURL = signaturePad.toDataURL();
-          download(dataURL, name);
-          alert(`Signature saved as ${name}.png`)
-        } else {
-          alert('File named automatically!')
-          const generatedName = generateName(10);
-          var dataURL = signaturePad.toDataURL();
-          download(dataURL, generatedName);
-        }
-        
-    }
-})
+function dataURLToBlob(dataURL) {
+  // Code taken from https://github.com/ebidel/filer.js
+  var parts = dataURL.split(';base64,');
+  var contentType = parts[0].split(":")[1];
+  var raw = window.atob(parts[1]);
+  var rawLength = raw.length;
+  var uInt8Array = new Uint8Array(rawLength);
+
+  for (var i = 0; i < rawLength; ++i) {
+    uInt8Array[i] = raw.charCodeAt(i);
+  }
+
+  return new Blob([uInt8Array], { type: contentType });
+}
+
+/**
+ * Used to download the signed signature
+ * @param {*} dataURL 
+ * @param {string} filename 
+ */
+function download(dataURL, filename) {
+  if (navigator.userAgent.indexOf("Safari") > -1 && navigator.userAgent.indexOf("Chrome") === -1) {
+    window.open(dataURL);
+  } else {
+    var blob = dataURLToBlob(dataURL);
+    var url = window.URL.createObjectURL(blob);
+
+    var a = document.createElement("a");
+    a.style = "display: none";
+    a.href = url;
+    a.download = filename;
+
+    document.body.appendChild(a);
+    a.click();
+
+    window.URL.revokeObjectURL(url);
+  }
+}
 
 /**
  * Used to generate random strings
@@ -61,6 +83,30 @@ function generateName(length) {
   }
   return result;
 }
+
+/**
+ * An onclick event for saving signed podpis
+ */
+document.getElementById('save').addEventListener("click", () => {
+    if (signaturePad.isEmpty()) {
+        alert("Signature is empty")
+    } else {
+        const name = prompt("Name signature");
+        if (name != null) {
+          const saved = `${name}-podpis-world-brain-technology-ltd`
+          var dataURL = signaturePad.toDataURL();
+          download(dataURL, saved);
+          alert(`Signature saved as ${saved}.png`)
+        } else {
+          alert('File named saved automatically!')
+          const generatedName = generateName(10);
+          const saved = `${generatedName} podpis-world-brain-technology-ltd`
+          var dataURL = signaturePad.toDataURL();
+          download(dataURL, saved);
+        }
+        
+    }
+})
 
 // create.addEventListener("click", () => {
 //     var Url = signaturePad.toDataURL();
