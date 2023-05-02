@@ -21,6 +21,11 @@
             height: 230px;
             display: none;
         }
+
+        footer a {
+            text-decoration: none;
+            font-size: 15px;
+        }
     </style>
 </head>
 
@@ -30,34 +35,15 @@
     <div class="container-fluid mt-3">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">Podpis</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
-                        </li>
-                        <!-- <li class="nav-item">
-                            <a class="nav-link" href="#">Add Signature</a>
-                        </li> -->
-                        <!-- <li class="nav-item">
-                            <a class="nav-link" title="Upload File" id="import" style="cursor: pointer;">Import File</a>
-                            <input type="file" onchange="preview(this)" name="file" id="file">
-                        </li> -->
-                    </ul>
-                </div>
+                <a class="navbar-brand" href="/">Podpis</a>
             </div>
         </nav>
 
         <div class="container bg-dark p-3 mt-3 bg-opacity-10 rounded text-center" id="view">
             <div class="canvas">
                 <canvas id="signa" class="mb-3 border shadow-lg border-light"></canvas> <br>
-                <button id="save" class="shadow btn btn-warning btn-sm border border-light">Save</button>
-                <button id="clear" class="btn btn-secondary btn-sm shadow border">Clear</button>
-                <!-- <button id="create" class="btn btn-primary rounded-pill shadow border border-light">Create</button> -->
+                <button id="save" class="shadow btn btn-warning border border-light">Save</button>
+                <button id="clear" class="btn btn-secondary shadow border">Clear</button>
             </div>
         </div>
     </div>
@@ -78,13 +64,8 @@
             </div>
         </div>
 
-        <footer class="text-muted text-center mt-4">Powered by: World Brain Technology</footer>
-    </div>
-
-    <div class="container">
-        <!-- <img id="preview" width="300" height="300" src="" alt="preview"> -->
-        <!-- <iframe id="pdf" src="" download="false" frameborder="0" scrolling="auto" height="1000" width="100%"></iframe> -->
-        <embed id="pdf" width="700" height="300" src="">
+        <p class="text-muted text-center mt-4">&copy; 2023. Podpis</p>
+        <footer class="text-muted text-center mt-5 align-bottom">Powered by <a href="https://worldbraintechnology.com" target="_blank">World Brain Technology Limited</a></footer>
     </div>
 
     
